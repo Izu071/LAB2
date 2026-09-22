@@ -1,0 +1,8 @@
+# Cấu hình của dịch vụ trạng thái, trạng thái khởi đầu của bài lab.
+#
+# Tệp này được ảnh khởi đầu đặt ở chế độ 666, nghĩa là ai trong container cũng
+# ghi đè được. Đó là một mặc định do người đóng gói chọn thay bạn, và mục 2.4 của
+# giáo trình gọi đúng tên nó.
+ten: dich-vu-trang-thai
+cong: 80
+muc_nhat_ky: thuong

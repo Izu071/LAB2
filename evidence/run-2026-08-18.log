@@ -1,0 +1,136 @@
+Bằng chứng chạy bộ kiểm lab S2
+Ngày chạy    : 18/08/2026
+Chạy ở       : một cây làm việc sạch, tách khỏi thư mục soạn thảo
+Múi giờ      : Asia/Ho_Chi_Minh · LC_ALL=C.UTF-8 · PYTHONHASHSEED=0
+Đường dẫn tuyệt đối trong nhật ký này đã thay bằng nhãn trung tính.
+
+Bằng chứng gồm ba phần, và phải có đủ cả ba.
+
+Phần A là bộ kiểm TỰ KIỂM CHÍNH NÓ, nằm ở kho nội bộ, không phát cho sinh viên.
+Nó chạy chính bộ kiểm công khai lên một bản mẫu đạt và một bản mẫu trượt, rồi
+khẳng định ba điều: bản đạt qua sạch, bản trượt bị bắt, và tập phép kiểm bắt
+được bản trượt ĐÚNG BẰNG danh sách mười hai tên đã liệt kê. Điều kiện thứ ba
+đòi bằng nhau chứ không đòi chứa nhau, vì thiếu một tên nghĩa là bộ chấm mất
+khả năng bắt một lỗi, còn thừa một tên nghĩa là nó bắt đầu đánh trượt một thứ
+không sai, và một cáo buộc sai tốn kém đúng bằng một lỗi bị bỏ sót.
+
+Phần B là bộ kiểm CÔNG KHAI mà sinh viên chạy bằng `make verify`, chạy trên bản
+mẫu đạt, với tệp preflight thật do `make preflight` sinh ra trên máy chạy lần
+này chứ không phải tệp preflight của bản mẫu.
+
+Phần C là lượt xem trước của ghim-digest.sh, tức tập lệnh thay thẻ bằng digest.
+
+GHI CHÚ VỀ MỘT PHÉP TRƯỢT CÓ CHỦ Ý.
+Máy chạy lần này có docker CLI nhưng không có docker daemon, nên phép
+test_docker_daemon_chay trượt, và nó trượt ĐÚNG: đó chính là tình huống phép
+kiểm sinh ra để bắt, kèm câu hướng dẫn sinh viên phải làm gì. Mười lăm phép còn
+lại của phần B xanh. Trên máy sinh viên có Docker Desktop đang chạy thì cả mười
+sáu phép đều xanh. Ràng buộc môi trường này đã ghi ở docs/DECISIONS.md mục D-005.
+
+GHI CHÚ VỀ PHẦN CHƯA CHẠY ĐƯỢC Ở LẦN NÀY.
+Không có daemon nên chưa dựng được ảnh, chưa chạy được `make up`, `make attack`,
+`make defend`, `make stack-protector`. Mọi tệp bằng chứng dùng ở phần B là tệp
+của bản mẫu, viết theo đúng định dạng mà các tập lệnh đo sinh ra. Hai chỗ phải
+xác nhận lại ở lần chạy CI đầu tiên: chỉ số làm cứng thật của Lynis trên ảnh đã
+ghim, và cặp mã thoát thật của thí nghiệm trình dịch. Bộ kiểm đã viết sao cho nó
+không phụ thuộc vào giá trị cụ thể của hai thứ đó, nhưng con số minh họa trong
+tài liệu thì phải sửa theo số đo thật.
+
+==========================================================
+PHẦN A. Bộ kiểm nội bộ tự kiểm, lệnh: python3 -m pytest tests/ -v
+==========================================================
+============================= test session starts ==============================
+platform linux -- Python 3.11.15, pytest-9.1.1, pluggy-1.6.0 -- /usr/bin/python3
+rootdir: <cây-làm-việc>/labs-internal/css-lab-S02-lam-cung-he-dieu-hanh
+plugins: anyio-4.13.0
+collecting ... collected 3 items
+
+tests/test_bo_kiem_tu_kiem.py::test_ban_mau_dat_thi_qua_het PASSED       [ 33%]
+tests/test_bo_kiem_tu_kiem.py::test_ban_mau_truot_thi_phai_bi_bat PASSED [ 66%]
+tests/test_bo_kiem_tu_kiem.py::test_bat_dung_nhung_phep_kiem_da_liet_ke PASSED [100%]
+
+============================== 3 passed in 0.89s ===============================
+
+Mười hai phép kiểm bắt được bản mẫu trượt, đúng bằng danh sách đã khai:
+  test_compose_lam_cung.py::test_bo_het_nang_luc_va_chi_them_lai_cai_can
+  test_compose_lam_cung.py::test_chan_leo_quyen_qua_setuid
+  test_compose_lam_cung.py::test_he_tep_goc_chi_doc_va_van_ghi_duoc_nhat_ky
+  test_compose_lam_cung.py::test_khong_vuot_rang_buoc_cuong_che
+  test_bang_chung.py::test_nang_luc_that_su_giam
+  test_bang_chung.py::test_dich_vu_van_song_va_da_mat_quyen_doc_bi_mat
+  test_bang_chung.py::test_duong_leo_quyen_da_bi_chan
+  test_bang_chung.py::test_quyen_tep_va_bit_setuid
+  test_bang_chung.py::test_nhat_ky_ghi_du_su_kien_da_dinh
+  test_bang_chung.py::test_lynis_do_hai_lan_va_giai_thich_chenh_lech
+  test_bang_chung.py::test_hai_lan_dich_C_cho_hai_ma_thoat
+  test_bang_chung.py::test_bang_lam_cung_du_dong_va_dan_ma
+Bốn phép còn lại xanh trên bản mẫu trượt, và xanh đúng: ba phép preflight không
+liên quan tới phần làm cứng, còn phép người chạy không phải root thì bản mẫu
+trượt làm đúng thật, vì nó có khai người chạy. Một bản mẫu trượt sai mọi chỗ sẽ
+không kiểm được gì về khả năng phân biệt của bộ chấm.
+
+==========================================================
+PHẦN B. Bộ kiểm công khai, lệnh: make verify
+==========================================================
+============================= test session starts ==============================
+platform linux -- Python 3.11.15, pytest-9.1.1, pluggy-1.6.0 -- /usr/bin/python3
+rootdir: <cây-làm-việc>/labs/css-lab-S02-lam-cung-he-dieu-hanh
+plugins: anyio-4.13.0
+collecting ... collected 16 items
+
+tests/test_bang_chung.py::test_nang_luc_that_su_giam PASSED              [  6%]
+tests/test_bang_chung.py::test_dich_vu_van_song_va_da_mat_quyen_doc_bi_mat PASSED [ 12%]
+tests/test_bang_chung.py::test_duong_leo_quyen_da_bi_chan PASSED         [ 18%]
+tests/test_bang_chung.py::test_quyen_tep_va_bit_setuid PASSED            [ 25%]
+tests/test_bang_chung.py::test_nhat_ky_ghi_du_su_kien_da_dinh PASSED     [ 31%]
+tests/test_bang_chung.py::test_lynis_do_hai_lan_va_giai_thich_chenh_lech PASSED [ 37%]
+tests/test_bang_chung.py::test_hai_lan_dich_C_cho_hai_ma_thoat PASSED    [ 43%]
+tests/test_bang_chung.py::test_bang_lam_cung_du_dong_va_dan_ma PASSED    [ 50%]
+tests/test_compose_lam_cung.py::test_dich_vu_khong_chay_bang_root PASSED [ 56%]
+tests/test_compose_lam_cung.py::test_bo_het_nang_luc_va_chi_them_lai_cai_can PASSED [ 62%]
+tests/test_compose_lam_cung.py::test_chan_leo_quyen_qua_setuid PASSED    [ 68%]
+tests/test_compose_lam_cung.py::test_he_tep_goc_chi_doc_va_van_ghi_duoc_nhat_ky PASSED [ 75%]
+tests/test_compose_lam_cung.py::test_khong_vuot_rang_buoc_cuong_che PASSED [ 81%]
+tests/test_preflight.py::test_ghi_du_cac_muc PASSED                      [ 87%]
+tests/test_preflight.py::test_docker_co_mat PASSED                       [ 93%]
+tests/test_preflight.py::test_docker_daemon_chay FAILED                  [100%]
+
+=================================== FAILURES ===================================
+___________________________ test_docker_daemon_chay ____________________________
+tests/test_preflight.py:48: in test_docker_daemon_chay
+    assert "KHONG CHAY" not in dong[0], (
+E   AssertionError: Docker đã cài nhưng daemon chưa chạy, nên không một phép đo nào của bài này thực hiện được. Trên Windows và macOS thì mở Docker Desktop và đợi biểu tượng cá voi chuyển sang trạng thái đang chạy. Trên Linux thì chạy `sudo systemctl start docker`.
+E   assert 'KHONG CHAY' not in 'docker daemon: KHONG CHAY'
+E     
+E     'KHONG CHAY' is contained here:
+E       docker daemon: KHONG CHAY
+E     ?                ++++++++++
+=========================== short test summary info ============================
+FAILED tests/test_preflight.py::test_docker_daemon_chay - AssertionError: Doc...
+========================= 1 failed, 15 passed in 0.04s =========================
+
+Tệp preflight thật của lần chạy này:
+kien truc CPU: x86_64
+he dieu hanh : Linux
+phien ban Python: Python 3.11.15
+RAM kha dung: 6734 MiB
+dia trong: 30580 MiB
+phien ban Docker: Docker version 29.4.3, build 055a478
+docker daemon: KHONG CHAY
+
+==========================================================
+PHẦN C. Ghim digest, lệnh: bash ghim-digest.sh
+==========================================================
+== <cây-làm-việc>/labs/css-lab-S02-lam-cung-he-dieu-hanh/docker-compose.yml
+  BỎ QUA    css-s02-dichvu:v1 (ảnh dựng tại chỗ, không có trong sổ đăng ký)
+== <cây-làm-việc>/labs/css-lab-S02-lam-cung-he-dieu-hanh/dich-vu/Dockerfile
+  KHÔNG GIẢI ĐƯỢC  debian:bookworm-slim. Kiểm mạng và tên ảnh, đừng gõ tay digest.
+
+Đây là lượt xem trước, chưa sửa gì. Chạy lại với --sua để ghi vào tệp.
+Còn 1 dòng chưa ghim được. Đây là lỗi chặn, không phải cảnh báo.
+ma thoat: 1
+
+Mã thoát 1 ở đây là hành vi đúng, không phải hỏng. Máy soạn bài không kéo được
+ảnh nên không hỏi được sổ đăng ký, và tập lệnh từ chối bịa ra một digest. Dòng
+FROM vẫn mang thẻ, kèm chú thích CHUA_GHIM_DIGEST, và nó phải được ghim trên máy
+có mạng trước khi lab được phát.

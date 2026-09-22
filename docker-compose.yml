@@ -1,0 +1,69 @@
+# Lab S2. Trạng thái KHỞI ĐẦU của môi trường, cố ý cấu hình rộng tay.
+#
+# Tệp này là một trong hai chỗ bạn sửa, chỗ còn lại là dich-vu/Dockerfile. Bộ
+# chấm đọc chính tệp này, nên thứ bạn khai ở đây phải là thứ bạn thật sự chạy.
+#
+# Hai ràng buộc dưới đây do phạm vi cho phép của học phần đặt ra, không phải do
+# bài tập đặt ra, và bộ chấm đánh trượt nếu vi phạm: cổng chỉ được ánh xạ về
+# 127.0.0.1, và không dịch vụ nào được dùng privileged, network_mode host, hay
+# tắt seccomp. Lý do nằm ở SCOPE.md.
+name: css-s02
+
+services:
+
+  # Dịch vụ trạng thái. Đây là thứ bạn phải thu hẹp.
+  #
+  # Trạng thái khởi đầu: chạy bằng root, mang trọn tập năng lực mặc định của
+  # container, hệ tệp gốc ghi được, không chặn đường leo quyền qua setuid.
+  dichvu:
+    build: ./dich-vu
+    # CHUA_GHIM_DIGEST: thẻ dưới đây đặt tên cho ảnh dựng tại chỗ từ ./dich-vu,
+    # nên digest thật của nó chỉ tồn tại sau khi bạn dựng. Ảnh nền lấy từ sổ đăng
+    # ký nằm ở dòng FROM trong dich-vu/Dockerfile, và đó là dòng cần ghim theo
+    # digest. Chạy ./ghim-digest.sh trên máy có mạng; không tự gõ chuỗi sha256.
+    image: css-s02-dichvu:v1
+    container_name: css-s02-dichvu
+    # Cổng trong container lấy từ /etc/css-s02/cau-hinh.yaml, mặc định là 80.
+    # Đổi cổng trong tệp cấu hình thì phải đổi vế phải của dòng dưới đây theo.
+    ports:
+      - "127.0.0.1:8080:80"
+    volumes:
+      # Nhật ký phải sống sót qua bước làm cứng, vì buổi S7 lấy nó làm dữ liệu.
+      - nhat-ky:/var/log/css-s02
+    networks:
+      - labnet
+    restart: "no"
+
+    # === CHỖ LÀM VIỆC CỦA BẠN ===
+    # Bốn nhóm chỉ thị của phần làm cứng thuộc về đây. Đề bài mô tả kết quả phải
+    # đạt chứ không chép sẵn dòng cấu hình, vì việc tra tên chỉ thị đúng trong
+    # tài liệu Compose là một phần của bài. Xem mục 3 của README.md.
+    # === HẾT CHỖ LÀM VIỆC ===
+
+  # Container kiểm định. Chạy Lynis trên chính ảnh của dịch vụ, không chạy thường
+  # trực, chỉ dựng lên khi đo rồi bỏ. Nó nằm ngoài profile mặc định nên `up`
+  # không kéo nó lên cùng dịch vụ.
+  kiem:
+    profiles:
+      - kiem
+    build: ./dich-vu
+    # CHUA_GHIM_DIGEST: cùng ảnh dựng tại chỗ với dịch vụ, xem ghi chú ở trên.
+    image: css-s02-dichvu:v1
+    container_name: css-s02-kiem
+    command:
+      - lynis
+      - audit
+      - system
+      - --quick
+      - --no-colors
+    networks:
+      - labnet
+
+volumes:
+  nhat-ky:
+    name: css-s02-nhat-ky
+
+networks:
+  labnet:
+    name: css-s02-labnet
+    driver: bridge
