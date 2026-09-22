@@ -33,7 +33,7 @@ WORKDIR /usr/local/src
 COPY doc-bimat.c ghi-ten.c ./
 RUN gcc -O2 -o /usr/local/bin/doc-bimat doc-bimat.c \
  && chown root:root /usr/local/bin/doc-bimat \
- && chmod 4755 /usr/local/bin/doc-bimat
+ && chmod 0755 /usr/local/bin/doc-bimat
 
 COPY dich-vu.py /usr/local/bin/dich-vu.py
 COPY thu-leo-quyen.sh do-nang-luc.sh do-quyen-tep.sh thu-dich-vu.sh \
@@ -48,7 +48,7 @@ RUN printf 'khoa-phien-ban-thu-nghiem-cua-lab-S02\n' > /etc/css-s02/bi-mat.txt \
  && chown root:root /etc/css-s02/bi-mat.txt \
  && chmod 0600 /etc/css-s02/bi-mat.txt \
  && chown root:root /etc/css-s02/cau-hinh.yaml \
- && chmod 0666 /etc/css-s02/cau-hinh.yaml \
+ && chmod 0644 /etc/css-s02/cau-hinh.yaml \
  && { echo "ngay dung anh: ghi luc build"; \
       dpkg-query -W -f='${binary:Package} ${Version}\n' python3 gcc libc6-dev libcap2-bin lynis; \
     } > /etc/css-s02/phien-ban-goi.txt

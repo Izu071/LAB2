@@ -38,6 +38,16 @@ services:
     # Bốn nhóm chỉ thị của phần làm cứng thuộc về đây. Đề bài mô tả kết quả phải
     # đạt chứ không chép sẵn dòng cấu hình, vì việc tra tên chỉ thị đúng trong
     # tài liệu Compose là một phần của bài. Xem mục 3 của README.md.
+    user: "sv"
+    cap_drop: 
+      - ALL
+    cap_add: 
+      - NET_BIND_SERVICE
+    security_opt:
+      - no-new-privileges:true
+    read_only: true
+    tmpfs:
+      - /tmp
     # === HẾT CHỖ LÀM VIỆC ===
 
   # Container kiểm định. Chạy Lynis trên chính ảnh của dịch vụ, không chạy thường

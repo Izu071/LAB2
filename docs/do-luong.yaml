@@ -8,28 +8,39 @@
 # --- Năng lực của tiến trình dịch vụ ---
 # Đếm số năng lực trên dòng "Current:" của evidence/S02/capsh-truoc.txt và
 # capsh-sau.txt. Tập rỗng thì ghi 0.
-nang_luc_truoc:      # số nguyên
-nang_luc_sau:        # số nguyên
+nang_luc_truoc:  14    # số nguyên
+nang_luc_sau:   0     # số nguyên
 
 # --- Chỉ số làm cứng của Lynis ---
 # Lấy dòng "Hardening index" trong evidence/S02/lynis-truoc.txt và lynis-sau.txt.
-lynis_truoc:         # số nguyên từ 0 tới 100
-lynis_sau:           # số nguyên từ 0 tới 100
+lynis_truoc:    57     # số nguyên từ 0 tới 100
+lynis_sau:     57      # số nguyên từ 0 tới 100
 
 # Giải thích chênh lệch, tối thiểu 20 từ. Câu trả lời "chỉ số tăng vì em đã làm
 # cứng" không đạt. Nói rõ Lynis nhìn thấy thay đổi nào của bạn, và quan trọng hơn,
 # thay đổi nào của bạn nó KHÔNG nhìn thấy. Chỉ số không nhúc nhích cũng là một kết
 # quả hợp lệ nếu bạn giải thích được vì sao.
 lynis_giai_thich: >-
+  Giữa hai lần quét, Lynis không ghi nhận bất kỳ thay đổi hardening nào có tác động đến Hardening Index.
+  Các control như PAM password strength, fail2ban, auditd, sysstat, malware scanner, AppArmor/SELinux, umask,
+  legal banner và file integrity vẫn ở trạng thái NOT FOUND/thiếu, giống lần trước. 
+  Lynis chỉ phát hiện thêm cảnh báo PKGS-7392 liên quan đến CVE, 
+  nhưng đây là kết quả kiểm tra vulnerability database theo snapshot package khác nhau và không phải control tính điểm hardening. 
+  Vì vậy, điểm 57 giữ nguyên là phù hợp: lần chạy thứ hai chỉ phát hiện khác biệt về package vulnerability, 
+  trong khi không có thay đổi cấu hình hoặc công cụ bảo mật nào được Lynis ghi nhận để chuyển control từ fail sang pass.
 
 # --- Thí nghiệm stack protector ---
 # Hai mã thoát trong evidence/S02/stack-protector.txt.
-ma_thoat_khong_bao_ve:   # số nguyên
-ma_thoat_co_bao_ve:      # số nguyên
+ma_thoat_khong_bao_ve: 139  # số nguyên
+ma_thoat_co_bao_ve:   134   # số nguyên
 
 # --- Cổng dịch vụ nghe sau khi làm cứng ---
 # Ghi đúng cổng trong container, tức giá trị khóa cong của tệp cấu hình sau khi
 # bạn sửa. Giữ cổng 80 cũng được, đổi sang cổng không đặc quyền cũng được, miễn
 # là bạn nói được vì sao ở dòng dưới.
-cong_sau:
-vi_sao_chon_cong_do: >-
+cong_sau: 8080
+vi_sao_chon_cong_do: >- 
+  Chọn cổng 8080 vì đây là cổng không đặc quyền, không yêu cầu CAP_NET_BIND_SERVICE
+  để bind trong Linux. Việc chuyển dịch vụ từ cổng 80 sang 8080 giúp giảm yêu cầu
+  đặc quyền của tiến trình, phù hợp với nguyên tắc least privilege và không cần
+  cấp thêm capability chỉ để lắng nghe cổng thấp.

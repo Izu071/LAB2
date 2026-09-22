@@ -1,0 +1,4 @@
+nguoi_chay=sv uid=10001
+phep_1_doc_bi_mat_qua_setuid=1
+phep_2_ghi_de_tep_cau_hinh=1
+doc_ky_ket_qua: ma thoat 0 nghia la phep thu thanh cong, tuc cau hinh dang cho phep.

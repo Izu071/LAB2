@@ -1,0 +1,6 @@
+ngay dung anh: ghi luc build
+gcc 4:12.2.0-3
+libc6-dev:amd64 2.36-9+deb12u14
+libcap2-bin 1:2.66-4+deb12u3+b1
+lynis 3.0.8-1.1
+python3 3.11.2-1+b1

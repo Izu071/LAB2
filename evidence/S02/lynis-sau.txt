@@ -23,7 +23,7 @@
   Operating system version:  12
   Kernel version:            6.6.87.2
   Hardware platform:         x86_64
-  Hostname:                  b72444483593
+  Hostname:                  087311467a16
   ---------------------------------------------------
   Profiles:                  /etc/lynis/default.prf
   Log file:                  /var/log/lynis.log
@@ -111,7 +111,7 @@
 [+] Boot and services
 ------------------------------------
 
-  [WARNING]: Test DEB-0880 had a long execution: 10.162120 seconds
+  [WARNING]: Test DEB-0880 had a long execution: 13.762078 seconds
 
 
 =================================================================
