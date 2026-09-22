@@ -1,0 +1,2 @@
+duong_dan=/ ma=200
+duong_dan=/bi-mat ma=200

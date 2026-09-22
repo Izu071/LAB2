@@ -1,0 +1,5 @@
+644 root root /etc/css-s02/cau-hinh.yaml
+600 root root /etc/css-s02/bi-mat.txt
+755 root root /usr/local/bin/doc-bimat
+755 sv sv /var/log/css-s02
+-- nang luc gan tren tep --

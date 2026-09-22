@@ -1,0 +1,5 @@
+lenh_dich_khong_bao_ve=gcc -O0 -fno-stack-protector
+ma_thoat_khong_bao_ve=139
+lenh_dich_co_bao_ve=gcc -O0 -fstack-protector-all
+ma_thoat_co_bao_ve=134
+doc_ky_ket_qua: hai ma thoat khac nhau nghia la co bao ve doi hau qua cua cung mot loi.
