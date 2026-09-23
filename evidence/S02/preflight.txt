@@ -1,7 +1,12 @@
 kien truc CPU: x86_64
 he dieu hanh : Linux
 phien ban Python: Python 3.12.3
+<<<<<<< HEAD
 RAM kha dung: 6951 MiB
 dia trong: 105652 MiB
+=======
+RAM kha dung: 6949 MiB
+dia trong: 105653 MiB
+>>>>>>> fdc6f3ed325e0b8b25ec122e5da75c63664de49b
 phien ban Docker: Docker version 29.7.2, build a7dcaa6
 docker daemon: chay

@@ -35,6 +35,12 @@ services:
     restart: "no"
 
     # === CHỖ LÀM VIỆC CỦA BẠN ===
+<<<<<<< HEAD
+=======
+    # Bốn nhóm chỉ thị của phần làm cứng thuộc về đây. Đề bài mô tả kết quả phải
+    # đạt chứ không chép sẵn dòng cấu hình, vì việc tra tên chỉ thị đúng trong
+    # tài liệu Compose là một phần của bài. Xem mục 3 của README.md.
+>>>>>>> fdc6f3ed325e0b8b25ec122e5da75c63664de49b
     user: "sv"
     cap_drop: 
       - ALL
@@ -45,9 +51,12 @@ services:
     read_only: true
     tmpfs:
       - /tmp
+<<<<<<< HEAD
     # Bốn nhóm chỉ thị của phần làm cứng thuộc về đây. Đề bài mô tả kết quả phải
     # đạt chứ không chép sẵn dòng cấu hình, vì việc tra tên chỉ thị đúng trong
     # tài liệu Compose là một phần của bài. Xem mục 3 của README.md.
+=======
+>>>>>>> fdc6f3ed325e0b8b25ec122e5da75c63664de49b
     # === HẾT CHỖ LÀM VIỆC ===
 
   # Container kiểm định. Chạy Lynis trên chính ảnh của dịch vụ, không chạy thường

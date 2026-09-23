@@ -23,7 +23,11 @@
   Operating system version:  12
   Kernel version:            6.6.87.2
   Hardware platform:         x86_64
+<<<<<<< HEAD
   Hostname:                  6ddea828e1ef
+=======
+  Hostname:                  b72444483593
+>>>>>>> fdc6f3ed325e0b8b25ec122e5da75c63664de49b
   ---------------------------------------------------
   Profiles:                  /etc/lynis/default.prf
   Log file:                  /var/log/lynis.log
@@ -111,7 +115,11 @@
 [+] Boot and services
 ------------------------------------
 
+<<<<<<< HEAD
   [WARNING]: Test DEB-0880 had a long execution: 10.124752 seconds
+=======
+  [WARNING]: Test DEB-0880 had a long execution: 10.162120 seconds
+>>>>>>> fdc6f3ed325e0b8b25ec122e5da75c63664de49b
 
 
 =================================================================
@@ -318,9 +326,12 @@
 =================================================================
 
 
+<<<<<<< HEAD
   [WARNING]: Test NETW-3006 had a long execution: 10.418429 seconds
 
 
+=======
+>>>>>>> fdc6f3ed325e0b8b25ec122e5da75c63664de49b
 =================================================================
 
   Exception found!

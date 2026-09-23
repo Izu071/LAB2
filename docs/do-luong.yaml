@@ -43,4 +43,8 @@ vi_sao_chon_cong_do: >-
   Chọn cổng 8080 vì đây là cổng không đặc quyền, không yêu cầu CAP_NET_BIND_SERVICE
   để bind trong Linux. Việc chuyển dịch vụ từ cổng 80 sang 8080 giúp giảm yêu cầu
   đặc quyền của tiến trình, phù hợp với nguyên tắc least privilege và không cần
+<<<<<<< HEAD
   cấp thêm capability chỉ để lắng nghe cổng thấp.
+=======
+  cấp thêm capability chỉ để lắng nghe cổng thấp.
+>>>>>>> fdc6f3ed325e0b8b25ec122e5da75c63664de49b

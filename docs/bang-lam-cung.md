@@ -26,5 +26,9 @@ Có ít nhất một biện pháp bạn cân nhắc rồi bỏ, vì nó đắt h
 là bài toán kinh tế, và một bài nộp không có dòng nào bị bỏ là một bài chưa cân
 nhắc gì.
 
+<<<<<<< HEAD
 *Em cân nhắc rồi bỏ việc đổi `doc-bimat` sang một chương trình dùng `sudo` có cấu hình giới hạn thay vì chỉ gỡ bit setuid, vì lợi ích thêm được (giữ khả năng đọc tệp bí mật cho một tài khoản bảo trì trong tương lai) không bù nổi chi phí: bài lab hiện tại không có nhu cầu vận hành nào thật sự cần đọc `bi-mat.txt` ngoài hai phép thử tấn công đã đóng gói, nên dựng thêm một cơ chế `sudo` chỉ làm tăng diện tích tấn công (thêm một tệp cấu hình `/etc/sudoers.d` cần bảo vệ) mà không cắt được rủi ro nào đang tồn tại trong phạm vi bài.
 *
+=======
+*Em cân nhắc rồi bỏ việc đổi doc-bimat sang một chương trình dùng sudo có cấu hình giới hạn thay vì chỉ gỡ bit setuid, vì lợi ích thêm được (giữ khả năng đọc tệp bí mật cho một tài khoản bảo trì trong tương lai) không bù nổi chi phí: bài lab hiện tại không có nhu cầu vận hành nào thật sự cần đọc bi-mat.txt ngoài hai phép thử tấn công đã đóng gói, nên dựng thêm một cơ chế sudo chỉ làm tăng diện tích tấn công (thêm một tệp cấu hình /etc/sudoers.d cần bảo vệ) mà không cắt được rủi ro nào đang tồn tại trong phạm vi bài.*
+>>>>>>> fdc6f3ed325e0b8b25ec122e5da75c63664de49b
